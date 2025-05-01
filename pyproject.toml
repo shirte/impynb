@@ -1,0 +1,103 @@
+[project]
+name = "impynb"
+version = "0.1.0"
+description = ""
+authors = [
+    { name = "Steffen Hirte", email = "shirte@users.noreply.github.com" },
+]
+readme = "README.md"
+requires-python = ">=3.9,<4"
+dependencies = ["ipykernel (>=6.29.5,<7.0.0)", "nbformat (>=5.10.4,<6.0.0)"]
+
+[tool.poetry]
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.10.0"
+pytest-watcher = "^0.4.3"
+pytest = "^8.4.1"
+mypy = "^1.16.1"
+typing-extensions = "^4.14.0"
+papermill = "^2.6.0"
+
+[tool.ruff]
+select = [
+    # "YTT", # flake8-2020
+    # "ANN", # flake8-annotations
+    # "S",   # flake8-bandit
+    # "BLE", # flake8-blind-except
+    # "FBT", # flake8-boolean-trap
+    # "B",   # flake8-bugbear
+    # "A",   # flake8-builtins
+    # "COM", # flake8-commas
+    # "C4",  # flake8-comprehensions
+    # "ISC", # flake8-implicit-str-concat
+    # "ICN", # flake8-import-conventions
+    # "LOG", # flake8-logging
+    # "G",   # flake8-logging-format
+    # "INP", # flake8-no-pep420
+    # "PIE", # flake8-pie
+    # "T20", # flake8-print
+    # "PYI", # flake8-pyi
+    # "PT",  # flake8-pytest-style
+    # "Q",   # flake8-quotes
+    # "RSE", # flake8-raise
+    # "RET", # flake8-return
+    # "SLF", # flake8-self
+    # "SIM", # flake8-simplify
+    # "TD",  # flake8-todos
+    # "TC",  # flake8-type-checking
+    # "ARG", # flake8-unused-arguments
+    # "PTH", # flake8-use-pathlib
+    # "FLY", # flake8-flynt
+    "I", # isort
+    "N", # pep8-naming
+    "E", # pycodestyle errors
+    "W", # pycodestyle warnings
+    # "DOC", # pydoclint
+    # "D",   # pydocstyle
+    "F",  # pyflakes
+    "UP", # pyupgrade
+    # "RUF", # ruff-specific rules
+    "TRY", # tryceratops
+]
+
+ignore = []
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+unfixable = []
+
+line-length = 100
+indent-width = 4
+
+# Assume Python 3.9+
+target-version = "py39"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+show_error_codes = true
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
