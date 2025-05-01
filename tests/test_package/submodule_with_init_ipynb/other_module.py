@@ -1,0 +1,3 @@
+__all__ = ["VARIABLE_WAS_SET"]
+
+VARIABLE_WAS_SET = True
