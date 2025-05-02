@@ -17,8 +17,21 @@ else:
 
 
 class NotebookFinder(MetaPathFinderProtocol):
-    def __init__(self, skip_cell_tags: list[str] = []) -> None:
-        self._skip_cell_tags = skip_cell_tags
+    #
+    # Singleton
+    #
+    _instance: NotebookFinder | None = None
+
+    def __new__(cls) -> NotebookFinder:
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+    #
+    # Constructor
+    #
+    def __init__(self) -> None:
+        pass
 
     def find_spec(
         self,
@@ -60,6 +73,3 @@ class NotebookFinder(MetaPathFinderProtocol):
             fullname, loader, origin=str(notebook_path), is_package=is_package
         )
         return spec
-
-    def __repr__(self) -> str:
-        return f"NotebookFinder(skip_cell_tags={self._skip_cell_tags})"
