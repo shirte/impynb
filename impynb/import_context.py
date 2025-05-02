@@ -1,9 +1,12 @@
+from __future__ import annotations
+
 from collections.abc import Generator
 from contextlib import contextmanager
 from types import TracebackType
-from typing import Optional
 
-from .notebook_finder import NotebookFinder
+from typing_extensions import Unpack
+
+from .notebook_finder import NotebookFinder, NotebookFinderConfigUpdate
 
 __all__ = ["NotebookImportContext", "configure"]
 
@@ -15,32 +18,32 @@ class NotebookImportContext:
     Context manager for temporarily configuring notebook import settings.
     """
 
-    def __init__(self, skip_cell_tags: Optional[list[str]] = None):
-        self.skip_cell_tags = skip_cell_tags or []
-        self._original_skip_cell_tags: Optional[list[str]] = None
+    def __init__(self, **kwargs: Unpack[NotebookFinderConfigUpdate]) -> None:
+        self._new_config = kwargs
 
-    def __enter__(self) -> "NotebookImportContext":
+    def __enter__(self) -> NotebookImportContext:
         # Store original settings
-        self._original_skip_cell_tags = notebook_finder._skip_cell_tags.copy()
+        self._original_config = notebook_finder.config.copy()
 
         # Apply new settings
-        notebook_finder._skip_cell_tags = self.skip_cell_tags.copy()
+        notebook_finder.config = self._new_config
 
         return self
 
     def __exit__(
         self,
-        exc_type: Optional[type],
-        exc_val: Optional[BaseException],
-        exc_tb: Optional[TracebackType],
+        exc_type: type | None,
+        exc_val: BaseException | None,
+        exc_tb: TracebackType | None,
     ) -> None:
         # Restore original settings
-        if self._original_skip_cell_tags is not None:
-            notebook_finder._skip_cell_tags = self._original_skip_cell_tags
+        notebook_finder.config = self._original_config
 
 
 @contextmanager
-def configure(skip_cell_tags: Optional[list[str]] = None) -> Generator[None, None, None]:
+def configure(
+    **kwargs: Unpack[NotebookFinderConfigUpdate],
+) -> Generator[None, None, None]:
     """
     Context manager for temporarily configuring notebook import settings.
 
@@ -51,5 +54,5 @@ def configure(skip_cell_tags: Optional[list[str]] = None) -> Generator[None, Non
         with configure(skip_cell_tags=['test', 'debug']):
             import my_notebook  # Will skip cells tagged with 'test' or 'debug'
     """
-    with NotebookImportContext(skip_cell_tags):
+    with NotebookImportContext(**kwargs):
         yield

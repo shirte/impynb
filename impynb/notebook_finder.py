@@ -8,12 +8,22 @@ from pathlib import Path
 from types import ModuleType
 from typing import TYPE_CHECKING
 
+from typing_extensions import NotRequired, TypedDict
+
 from .notebook_loader import NotebookLoader
 
 if TYPE_CHECKING:
     from _typeshed.importlib import MetaPathFinderProtocol
 else:
     MetaPathFinderProtocol = object
+
+
+class NotebookFinderConfig(TypedDict):
+    skip_cell_tags: list[str]
+
+
+class NotebookFinderConfigUpdate(TypedDict, total=False):
+    skip_cell_tags: NotRequired[list[str]]
 
 
 class NotebookFinder(MetaPathFinderProtocol):
@@ -31,8 +41,25 @@ class NotebookFinder(MetaPathFinderProtocol):
     # Constructor
     #
     def __init__(self) -> None:
-        pass
+        self._config = NotebookFinderConfig(
+            skip_cell_tags=[],
+        )
 
+    #
+    # Configuration
+    #
+    @property
+    def config(self) -> NotebookFinderConfig:
+        return self._config
+
+    @config.setter
+    def config(self, value: NotebookFinderConfigUpdate) -> None:
+        for key, val in value.items():
+            self._config[key] = val
+
+    #
+    # Find Spec
+    #
     def find_spec(
         self,
         fullname: str,
@@ -67,7 +94,9 @@ class NotebookFinder(MetaPathFinderProtocol):
         if notebook_path is None:
             return None
 
-        loader = NotebookLoader(notebook_path, skip_cell_tags=self._skip_cell_tags)
+        loader = NotebookLoader(
+            notebook_path, skip_cell_tags=self._config["skip_cell_tags"]
+        )
         print("SPEC_FROM_LOADER", fullname, notebook_path, is_package)
         spec = importlib.util.spec_from_loader(
             fullname, loader, origin=str(notebook_path), is_package=is_package
