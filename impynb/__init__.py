@@ -2,9 +2,10 @@ import inspect
 import os
 import sys
 
+from .import_context import NotebookImportContext, configure
 from .notebook_finder import NotebookFinder
 
-__all__ = ["init"]
+__all__ = ["init", "configure", "NotebookImportContext"]
 
 
 # Important: we have to insert the NotebookFinder at the beginning of sys.meta_path in order to
@@ -26,20 +27,25 @@ notebook_finder = NotebookFinder()
 sys.meta_path.insert(0, notebook_finder)
 
 
-def init(skip_cell_tags: list[str] = []) -> None:
-    notebook_finder._skip_cell_tags = skip_cell_tags
+def init() -> None:
+    caller_frame = inspect.currentframe()
+    if caller_frame is None:
+        raise RuntimeError("Cannot get current frame")
 
-    caller_frame = inspect.currentframe().f_back
+    caller_frame = caller_frame.f_back
+    if caller_frame is None:
+        raise RuntimeError("Cannot get caller frame")
+
     caller_module_name = caller_frame.f_globals.get("__name__")
+    if caller_module_name is None:
+        raise RuntimeError("Cannot determine caller module name")
+
     caller_module = sys.modules[caller_module_name]
 
     if not hasattr(caller_module, "__file__") or caller_module.__file__ is None:
         caller_module.__file__ = caller_module.__vsc_ipynb_file__
 
     # figure out root package and module name
-    script_name = os.path.basename(caller_module.__file__)
-    script_module_name = os.path.splitext(script_name)[0]
-
     script_path = caller_module.__file__
 
     parent_dirs: list[str] = []
@@ -62,7 +68,6 @@ def init(skip_cell_tags: list[str] = []) -> None:
     assert len(parent_dirs) > 0, "Not a proper package, because no __init__.py found"
 
     root_module_path = script_path
-    root_module_name = parent_dirs[0]
 
     # assign package name
     if not hasattr(caller_module, "__package__") or caller_module.__package__ is None:
