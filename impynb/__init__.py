@@ -22,10 +22,13 @@ __all__ = ["init"]
 # see a package without __init__.py and interpret it as a namespace package (and return a valid
 # ModuleSpec). As a consequence, our finder is skipped and will never get the chance to discover
 # __init__.ipynb modules.
-sys.meta_path.insert(0, NotebookFinder())
+notebook_finder = NotebookFinder()
+sys.meta_path.insert(0, notebook_finder)
 
 
-def init() -> None:
+def init(skip_cell_tags: list[str] = []) -> None:
+    notebook_finder._skip_cell_tags = skip_cell_tags
+
     caller_frame = inspect.currentframe().f_back
     caller_module_name = caller_frame.f_globals.get("__name__")
     caller_module = sys.modules[caller_module_name]

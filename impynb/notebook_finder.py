@@ -17,8 +17,8 @@ else:
 
 
 class NotebookFinder(MetaPathFinderProtocol):
-    def __init__(self) -> None:
-        pass
+    def __init__(self, skip_cell_tags: list[str] = []) -> None:
+        self._skip_cell_tags = skip_cell_tags
 
     def find_spec(
         self,
@@ -54,9 +54,12 @@ class NotebookFinder(MetaPathFinderProtocol):
         if notebook_path is None:
             return None
 
-        loader = NotebookLoader(notebook_path)
+        loader = NotebookLoader(notebook_path, skip_cell_tags=self._skip_cell_tags)
         print("SPEC_FROM_LOADER", fullname, notebook_path, is_package)
         spec = importlib.util.spec_from_loader(
             fullname, loader, origin=str(notebook_path), is_package=is_package
         )
         return spec
+
+    def __repr__(self) -> str:
+        return f"NotebookFinder(skip_cell_tags={self._skip_cell_tags})"
