@@ -14,10 +14,25 @@ from .util import is_runnable_cell
 
 
 class NotebookLoader(Loader):
-    def __init__(self, path: Path, skip_cell_tags: list[str] = []) -> None:
+    def __init__(
+        self,
+        path: Path,
+        skip_cell_tags: list[str] = [],
+        event_loop: asyncio.AbstractEventLoop | None = None,
+    ) -> None:
         self._shell = InteractiveShell.instance()
         self._path = path
         self._skip_cell_tags = skip_cell_tags
+        self._event_loop = event_loop
+
+    def _get_event_loop(self) -> asyncio.AbstractEventLoop:
+        if self._event_loop is not None:
+            return self._event_loop
+
+        try:
+            return asyncio.get_running_loop()
+        except RuntimeError:
+            return asyncio.new_event_loop()
 
     def exec_module(self, mod: ModuleType) -> None:
         if mod.__spec__ is None:
@@ -71,7 +86,7 @@ class NotebookLoader(Loader):
 
                     # run the code
                     if self._shell.should_run_async(code):
-                        loop = asyncio.get_event_loop()
+                        loop = self._get_event_loop()
                         loop.run_until_complete(eval(code_obj, mod.__dict__))
                     else:
                         exec(code_obj, mod.__dict__)

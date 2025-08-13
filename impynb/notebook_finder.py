@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib
 import importlib.util
+from asyncio import AbstractEventLoop
 from collections.abc import Sequence
 from importlib.machinery import ModuleSpec
 from pathlib import Path
@@ -20,10 +21,12 @@ else:
 
 class NotebookFinderConfig(TypedDict):
     skip_cell_tags: list[str]
+    event_loop: AbstractEventLoop | None
 
 
 class NotebookFinderConfigUpdate(TypedDict, total=False):
     skip_cell_tags: NotRequired[list[str]]
+    event_loop: NotRequired[AbstractEventLoop]
 
 
 class NotebookFinder(MetaPathFinderProtocol):
@@ -43,6 +46,7 @@ class NotebookFinder(MetaPathFinderProtocol):
     def __init__(self) -> None:
         self._config = NotebookFinderConfig(
             skip_cell_tags=[],
+            event_loop=None,
         )
 
     #
@@ -67,8 +71,6 @@ class NotebookFinder(MetaPathFinderProtocol):
         target: ModuleType | None = None,
         /,
     ) -> ModuleSpec | None:
-        print("FIND_SPEC", fullname, path, target)
-
         if path is None:
             return None
 
@@ -95,9 +97,10 @@ class NotebookFinder(MetaPathFinderProtocol):
             return None
 
         loader = NotebookLoader(
-            notebook_path, skip_cell_tags=self._config["skip_cell_tags"]
+            notebook_path,
+            skip_cell_tags=self._config["skip_cell_tags"],
+            event_loop=self._config["event_loop"],
         )
-        print("SPEC_FROM_LOADER", fullname, notebook_path, is_package)
         spec = importlib.util.spec_from_loader(
             fullname, loader, origin=str(notebook_path), is_package=is_package
         )
