@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import ast
+import asyncio
 import linecache
 from importlib.abc import Loader
 from pathlib import Path
-from pprint import pp
 from types import ModuleType
 
 import nbformat
@@ -44,7 +45,9 @@ class NotebookLoader(Loader):
             for i, cell in enumerate(nb.cells):
                 if is_runnable_cell(cell, self._skip_cell_tags):
                     # transform the input to executable Python
-                    code = self._shell.input_transformer_manager.transform_cell(cell.source)
+                    code = self._shell.input_transformer_manager.transform_cell(
+                        cell.source
+                    )
 
                     # create a pseudo filename for the code object
                     pseudo_filename = f"{mod.__spec__.origin}[cell-{i}]"
@@ -62,10 +65,16 @@ class NotebookLoader(Loader):
                         code,
                         pseudo_filename,
                         "exec",
+                        ast.PyCF_ALLOW_TOP_LEVEL_AWAIT,
                         dont_inherit=True,
                     )
 
                     # run the code
-                    exec(code_obj, mod.__dict__)
+                    if self._shell.should_run_async(code):
+                        loop = asyncio.get_event_loop()
+                        loop.run_until_complete(eval(code_obj, mod.__dict__))
+                    else:
+                        exec(code_obj, mod.__dict__)
+
         finally:
             self._shell.user_ns = save_user_ns
