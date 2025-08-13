@@ -6,7 +6,7 @@ from types import TracebackType
 
 from typing_extensions import Unpack
 
-from .notebook_finder import NotebookFinder, NotebookFinderConfigUpdate
+from .notebook_finder import NotebookFinder, NotebookFinderConfig
 
 __all__ = ["NotebookImportContext", "configure"]
 
@@ -18,7 +18,7 @@ class NotebookImportContext:
     Context manager for temporarily configuring notebook import settings.
     """
 
-    def __init__(self, **kwargs: Unpack[NotebookFinderConfigUpdate]) -> None:
+    def __init__(self, **kwargs: Unpack[NotebookFinderConfig]) -> None:
         self._new_config = kwargs
 
     def __enter__(self) -> NotebookImportContext:
@@ -42,17 +42,39 @@ class NotebookImportContext:
 
 @contextmanager
 def configure(
-    **kwargs: Unpack[NotebookFinderConfigUpdate],
+    **kwargs: Unpack[NotebookFinderConfig],
 ) -> Generator[None, None, None]:
     """
     Context manager for temporarily configuring notebook import settings.
 
-    Args:
-        skip_cell_tags: List of cell tags to skip during notebook import
+    Parameters
+    ----------
+    skip_cell_tags : list[str]
+        List of cell tags to skip during notebook import
+    event_loop : AbstractEventLoop
+        Custom asyncio event loop to use during import
 
-    Example:
-        with configure(skip_cell_tags=['test', 'debug']):
-            import my_notebook  # Will skip cells tagged with 'test' or 'debug'
+    Yields
+    -------
+    None
+        This context manager yields no value.
+
+    See Also
+    --------
+    NotebookImportContext : The class that handles the actual configuration.
+
+    Examples
+    --------
+
+    Using custom cell tags:
+    >>> with configure(skip_cell_tags=['test', 'debug']):
+    ...     import my_notebook  # Will skip cells tagged with 'test' or 'debug'
+
+    Using a custom event loop:
+    >>> import asyncio
+    >>> my_event_loop = asyncio.new_event_loop()
+    >>> with configure(event_loop=my_event_loop):
+    ...    import my_notebook  # Will use the specified event loop for async operations
     """
     with NotebookImportContext(**kwargs):
         yield

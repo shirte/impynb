@@ -17,12 +17,12 @@ class NotebookLoader(Loader):
     def __init__(
         self,
         path: Path,
-        skip_cell_tags: list[str] = [],
+        skip_cell_tags: list[str] | None = None,
         event_loop: asyncio.AbstractEventLoop | None = None,
     ) -> None:
         self._shell = InteractiveShell.instance()
         self._path = path
-        self._skip_cell_tags = skip_cell_tags
+        self._skip_cell_tags = skip_cell_tags if skip_cell_tags is not None else []
         self._event_loop = event_loop
 
     def _get_event_loop(self) -> asyncio.AbstractEventLoop:

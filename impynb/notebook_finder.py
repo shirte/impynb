@@ -19,14 +19,9 @@ else:
     MetaPathFinderProtocol = object
 
 
-class NotebookFinderConfig(TypedDict):
-    skip_cell_tags: list[str]
+class NotebookFinderConfig(TypedDict, total=False):
+    skip_cell_tags: list[str] | None
     event_loop: AbstractEventLoop | None
-
-
-class NotebookFinderConfigUpdate(TypedDict, total=False):
-    skip_cell_tags: NotRequired[list[str]]
-    event_loop: NotRequired[AbstractEventLoop]
 
 
 class NotebookFinder(MetaPathFinderProtocol):
@@ -57,9 +52,8 @@ class NotebookFinder(MetaPathFinderProtocol):
         return self._config
 
     @config.setter
-    def config(self, value: NotebookFinderConfigUpdate) -> None:
-        for key, val in value.items():
-            self._config[key] = val
+    def config(self, value: NotebookFinderConfig) -> None:
+        self._config.update(value)
 
     #
     # Find Spec
