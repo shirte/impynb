@@ -58,17 +58,10 @@ select = [
     "F",  # pyflakes
     "UP", # pyupgrade
     # "RUF", # ruff-specific rules
-    "TRY", # tryceratops
+    # "TRY", # tryceratops
 ]
 
 ignore = []
-
-# Allow fix for all enabled rules (when `--fix`) is provided.
-fixable = ["ALL"]
-unfixable = []
-
-line-length = 100
-indent-width = 4
 
 # Assume Python 3.9+
 target-version = "py39"
@@ -101,3 +94,8 @@ show_error_codes = true
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+branch = "main"
+upload_to_vcs_release = true
