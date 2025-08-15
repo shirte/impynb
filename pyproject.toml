@@ -1,6 +1,6 @@
 [project]
 name = "impynb"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = [
     { name = "Steffen Hirte", email = "shirte@users.noreply.github.com" },

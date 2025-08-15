@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.1 (2025-08-15)
+
+### Fixes
+
+* fix: Use the correct action trigger ([`bbd8980`](https://github.com/shirte/impynb/commit/bbd89807c79488995de76c77f2929df93f5285b9))
+
+
 ## v0.1.0 (2025-08-15)
 
 ### Chores
