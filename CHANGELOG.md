@@ -1,6 +1,43 @@
 # CHANGELOG
 
 
+## v0.1.2 (2025-08-17)
+
+### Chores
+
+* chore: Clean cells and format code ([`5a850e1`](https://github.com/shirte/impynb/commit/5a850e138614eb8ee293fd787ada6beb504447b7))
+
+* chore: Clean notebooks on commit ([`5a70edd`](https://github.com/shirte/impynb/commit/5a70edd729ffeb0a8d3e07bf4ebf4b86a07f5cf9))
+
+* chore: Remove metadata from notebooks ([`3cdea45`](https://github.com/shirte/impynb/commit/3cdea4552da69503eb2424033e2c40760e3e74f4))
+
+* chore: Ignore jupyter checkpoints ([`844195d`](https://github.com/shirte/impynb/commit/844195d942bc5c5df0644cedb94400e7e1a8bd07))
+
+* chore: Remove notebook metadata before pushing changes ([`f8d742a`](https://github.com/shirte/impynb/commit/f8d742af6434335e652c04b1ad8e4f92afb1f34f))
+
+* chore: Add common pre-commit hooks ([`66ef6cd`](https://github.com/shirte/impynb/commit/66ef6cdaa55728f3c650764d22b68316d69eda64))
+
+* chore: Add pre-commit hooks ([`69babe3`](https://github.com/shirte/impynb/commit/69babe3ccf40adff8f9395ca2b1a2a41d6291276))
+
+* chore: Use a separate token for github actions ([`304c096`](https://github.com/shirte/impynb/commit/304c0964aeb6f6a56e9978a6ccc562120d7e4476))
+
+### Fixes
+
+* fix: Run initialization when importing impynb ([`4ed3a58`](https://github.com/shirte/impynb/commit/4ed3a58851675dbdc414beb04cf36718b5cbd375))
+
+* fix: Export util methods ([`a8b98d9`](https://github.com/shirte/impynb/commit/a8b98d9289f48627dd5ea4030d8ade79ac73baff))
+
+* fix: Extract util method to check if scipt is running in notebook ([`09b3b42`](https://github.com/shirte/impynb/commit/09b3b4215c111364d662d6586b29047f34700ab1))
+
+* fix: Extract util method to get path of current notebook ([`7396456`](https://github.com/shirte/impynb/commit/739645622be45fa4af6f6752897d932a0817e281))
+
+### Testing
+
+* test: Check import in papermill ([`4e7467e`](https://github.com/shirte/impynb/commit/4e7467e9ee47e463c22e50c732c2f0e4e8f710d6))
+
+* test: Add jupyter lab and notebook ([`3221fda`](https://github.com/shirte/impynb/commit/3221fda7b4f199fe5fe9b9f8e01be88237b2e605))
+
+
 ## v0.1.1 (2025-08-15)
 
 ### Fixes
