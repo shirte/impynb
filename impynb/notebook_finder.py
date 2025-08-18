@@ -74,9 +74,12 @@ class NotebookFinder(MetaPathFinderProtocol):
         is_package = False
         for d in path:
             # Check for a package (directory with __init__.ipynb)
+            # BUT: if the package contains a __init__.py AND a __init__.ipynb file,
+            # we prefer the __init__.py file and skip loading the notebook.
             pkg_dir = Path(d) / name
             init_nb = pkg_dir / "__init__.ipynb"
-            if init_nb.is_file():
+            init_py = pkg_dir / "__init__.py"
+            if init_nb.is_file() and not init_py.is_file():
                 notebook_path = init_nb
                 is_package = True
                 break
