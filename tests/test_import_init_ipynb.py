@@ -1,4 +1,4 @@
-import impynb
+import impynb  # noqa: F401
 
 
 def test_import_init_ipynb() -> None:

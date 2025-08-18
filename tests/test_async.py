@@ -15,6 +15,6 @@ def test_async(clean_imports: None) -> None:
 def test_custom_event_loop(clean_imports: None) -> None:
     mock_loop = Mock(spec=asyncio.AbstractEventLoop)
     with impynb.configure(event_loop=mock_loop):
-        from .test_package import async_cells
+        from .test_package import async_cells  # noqa: F401
 
     mock_loop.run_until_complete.assert_called_once()

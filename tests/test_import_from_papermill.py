@@ -18,6 +18,7 @@ def test_import_from_notebook_env_vars() -> None:
             relative_notebook_path,
             os.path.join(tmpdir, "result_import_from_papermill_env_vars.ipynb"),
             kernel_name="python3",
+            language="python",
         )
 
 
@@ -32,5 +33,6 @@ def test_import_from_notebook_parameters() -> None:
             relative_notebook_path,
             os.path.join(tmpdir, "result_import_from_papermill_parameters.ipynb"),
             kernel_name="python3",
+            language="python",
             parameters={"NOTEBOOK_PATH": os.path.abspath(relative_notebook_path)},
         )

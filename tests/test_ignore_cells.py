@@ -9,7 +9,9 @@ def test_ignoring_cells(clean_imports: None) -> None:
     assert contains_ignorable_cells.NOTEBOOK_WAS_IMPORTED is not None
     assert contains_ignorable_cells.NOTEBOOK_WAS_IMPORTED
 
-    assert not hasattr(contains_ignorable_cells, "CELL_WITH_SPECIAL_COMMENT_WAS_IGNORED")
+    assert not hasattr(
+        contains_ignorable_cells, "CELL_WITH_SPECIAL_COMMENT_WAS_IGNORED"
+    )
 
     # without further configuration, the cell with a tag should not be ignored
     assert contains_ignorable_cells.CELL_WITH_TAG_WAS_IGNORED is not None

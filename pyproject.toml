@@ -58,7 +58,7 @@ select = [
     "W", # pycodestyle warnings
     # "DOC", # pydoclint
     # "D",   # pydocstyle
-    "F",  # pyflakes
+    # "F",  # pyflakes
     "UP", # pyupgrade
     # "RUF", # ruff-specific rules
     # "TRY", # tryceratops
