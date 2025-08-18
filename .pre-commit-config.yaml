@@ -9,10 +9,18 @@ repos:
       - id: detect-private-key
       - id: end-of-file-fixer
       - id: trailing-whitespace
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: "v0.7.1"
+    hooks:
+      # run the linter
+      - id: ruff
+        args: [--fix]
+      # run the formatter
+      - id: ruff-format
   # remove output cells from all Jupyter notebooks
   - repo: https://github.com/kynan/nbstripout
     rev: 0.8.1
     hooks:
       - id: nbstripout
         args: [--extra-keys, "metadata.kernelspec metadata.language_info"]
-        stages: [commit, pre-push]
+        stages: [pre-commit, pre-push]
