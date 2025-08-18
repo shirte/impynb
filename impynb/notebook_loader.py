@@ -46,7 +46,8 @@ class NotebookLoader(Loader):
             nb = nbformat.read(f, 4)
 
         # check
-        assert nb["metadata"]["language_info"]["name"] == "python"
+        if nb["metadata"].get("language_info") is not None:
+            assert nb["metadata"]["language_info"].get("name") == "python"
 
         # extra work to ensure that magics that would affect the user_ns
         # actually affect the notebook module's ns
