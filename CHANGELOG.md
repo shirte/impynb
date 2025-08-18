@@ -1,6 +1,13 @@
 # CHANGELOG
 
 
+## v0.1.4 (2025-08-18)
+
+### Fixes
+
+* fix: Upgrade pip in github actions ([`089f9e5`](https://github.com/shirte/impynb/commit/089f9e58e9da5989ad4123e511ca9a9f9cdc4fe0))
+
+
 ## v0.1.3 (2025-08-18)
 
 ### Chores
