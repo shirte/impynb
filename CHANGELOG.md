@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v0.1.3 (2025-08-18)
+
+### Chores
+
+* chore: Add github action for running tests ([`da7d279`](https://github.com/shirte/impynb/commit/da7d279b8db089d3fb833cc3ecd360b2e4f38d93))
+
+* chore: Add github action for checking code ([`b6f4c5d`](https://github.com/shirte/impynb/commit/b6f4c5d4e976afe490424a529d63773770e43a03))
+
+* chore: Add ruff to pre-commit hooks ([`b2ec64f`](https://github.com/shirte/impynb/commit/b2ec64f5773c73c904881afbc4ef578c78ecec1f))
+
+### Code Style
+
+* style: Make ruff happy ([`bc9e1f3`](https://github.com/shirte/impynb/commit/bc9e1f313eb7e26819884141affe21374e8c77b0))
+
+### Fixes
+
+* fix: Do not rely on language_info to exist ([`696e330`](https://github.com/shirte/impynb/commit/696e3306edbde30c7a9fc5d4b08ae4586e4f413c))
+
+
 ## v0.1.2 (2025-08-17)
 
 ### Chores
