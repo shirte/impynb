@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v0.1.5 (2025-08-19)
+
+### Documentation
+
+* docs: Explain why we use importlib.abc.Loader ([`0f8d623`](https://github.com/shirte/impynb/commit/0f8d623b1736e893b9a4057ebafaa3d519b5eb79))
+
+* docs: Add Readme file ([`15163ed`](https://github.com/shirte/impynb/commit/15163edaf9fc84ba008e2da52670cd0899c07eb5))
+
+### Fixes
+
+* fix: Skip __init__.ipynb if __init__.py exists ([`d359394`](https://github.com/shirte/impynb/commit/d359394ad9fdf452b93a6f9662be76d89f9ca4a7))
+
+### Testing
+
+* test: Check importing local modules with relative path ([`51382d0`](https://github.com/shirte/impynb/commit/51382d0affc69fa48c10a3e48187070b5a182230))
+
+* test: Check if __init__.ipynb is skipped ([`ef084c6`](https://github.com/shirte/impynb/commit/ef084c64fbe38cc21e2032fbb15912234cc2ee82))
+
+
 ## v0.1.4 (2025-08-18)
 
 ### Fixes
