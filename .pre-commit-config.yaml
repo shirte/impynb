@@ -24,3 +24,9 @@ repos:
       - id: nbstripout
         args: [--extra-keys, "metadata.kernelspec metadata.language_info"]
         stages: [pre-commit, pre-push]
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        additional_dependencies:
+          - tomli
