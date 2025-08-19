@@ -44,6 +44,17 @@ def some_function(a, b):
 
 ## Features
 
+* **Understands package initializers**: Module initializers (`__init__.py`) can also be written as
+  Python notebooks (`__init__.ipynb`). If a package contains both files, only `__init__.py` will be used and `__init__.ipynb` is ignored for consistency reasons.
+  ```python
+  # my-package/my_package/my_module/__init__.ipynb (first cell)
+  variable = 42
+
+  # my-package/my_package/main.py
+  import impynb
+  from . import my_module
+  my_module.variable  # 42
+  ```
 * **Async code**: Notebook cells containing async code will be executed in the default event loop:
   ```python
   # my_notebook.ipynb
