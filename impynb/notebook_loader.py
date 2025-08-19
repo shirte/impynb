@@ -89,7 +89,7 @@ class NotebookLoader(Loader):
                     )
 
                     # run the code
-                    if self._shell.should_run_async(code):
+                    if self._shell.should_run_async(cell.source, transformed_cell=code):
                         loop = self._get_event_loop()
                         loop.run_until_complete(eval(code_obj, mod.__dict__))
                     else:
