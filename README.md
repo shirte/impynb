@@ -97,15 +97,41 @@ def some_function(a, b):
 
 ## Advanced configuration
 
-The package can be configured
+The package can be configured using the `init` method:
 
 ```python
 import impynb
 
-impynb.init()
+impynb.init(
+    skip_cell_tags=["test"],
+    # ...
+)
 
 # configuration only applies for imports *after* init() call
 from .my_notebook import nice_function
+```
+
+### Provide a notebook path
+
+If you like to use `impynb` with a tool that gives no information about the path to the current
+notebook file (e.g. `papermill`), then you need to call `init()` at the start of the notebook and
+pass the notebook path as argument:
+```python
+# my_notebook.ipynb (first cell)
+import os
+import impynb
+impynb.init(os.environ.get("NOTEBOOK_PATH"))
+
+# my_module.py
+import os
+import papermill as pm
+
+pm.execute_notebook(
+    "my_notebook.ipynb",
+    "result_file.ipynb",
+    kernel_name="python3",
+    parameters={"NOTEBOOK_PATH": os.path.abspath(".")},
+)
 ```
 
 ### Skip tagged cells
@@ -115,7 +141,7 @@ a specific tag on them:
 
 ```python
 import impynb
-impynb.init(skip_cell_tags=['test'])
+impynb.init(skip_cell_tags=["test"])
 ```
 
 ### Custom event loop
@@ -140,7 +166,7 @@ The package provides a context manager for a temporary reconfiguration of import
 ```python
 import impynb
 
-with impynb.configure(skip_cell_tags=['test']):
+with impynb.configure(skip_cell_tags=["test"]):
   # will ignore cells tagged as "test"
   from . import my_notebook
 
@@ -148,7 +174,8 @@ with impynb.configure(skip_cell_tags=['test']):
 import . from my_other_notebook
 ```
 
-All arguments of the `impynb.init` method are also available in `impynb.configure`.
+All arguments of the `impynb.init` method (except `notebook_path`) are available in
+`impynb.configure`.
 
 ## Compatibility
 
