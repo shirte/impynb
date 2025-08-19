@@ -4,7 +4,9 @@ import os
 import sys
 from typing import Optional
 
-from .import_context import NotebookImportContext, configure
+from typing_extensions import Unpack
+
+from .import_context import NotebookFinderConfig, NotebookImportContext, configure
 from .notebook_finder import NotebookFinder
 from .util import get_notebook_path, is_running_in_notebook
 
@@ -32,7 +34,12 @@ notebook_finder = NotebookFinder()
 sys.meta_path.insert(0, notebook_finder)
 
 
-def init(notebook_path: Optional[str] = None) -> None:
+def init(
+    notebook_path: Optional[str] = None, **kwargs: Unpack[NotebookFinderConfig]
+) -> None:
+    # apply the config (regardless of whether this runs in a notebook or not)
+    notebook_finder.config = kwargs
+
     if not is_running_in_notebook():
         return
 
@@ -102,7 +109,7 @@ def init(notebook_path: Optional[str] = None) -> None:
 
 # We call init() here to ensure that impynb is properly initialized when using it
 # directly in a notebook file, e.g. my_notebook.ipynb. When init() is called in a Python
-# script, it will do nothing, yet. When we import a notebook (e.g. from my_notebook
+# script, it will do nothing. Only when importing a notebook (e.g. from my_notebook
 # import some_function), the NotebookFinder will kick in and initialize the notebook
 # import context.
 init()
