@@ -147,6 +147,10 @@ All arguments of the `impynb.init` method are also available in `impynb.configur
 * ✅ Jupyter Notebooks: via `JPY_SESSION_NAME` environment variable or `__session__` as fallback
   ([source][jpy_session_name_answer])
 * ✅ Jupyter Lab: same as Jupyter Notebooks
+* ✅ Google Colab: creates a virtual Python module with a name based on the `COLAB_NOTEBOOK_ID` env
+  variable in the working directory (usually /content). Since a valid Python module requires an
+  `__init__.py` (or `__init__.ipynb`) file, you need to create one of these files in the working
+  directory to import modules from there.
 * ⚪ Papermill: provides no indication about the current notebook name or path (as far as I know)
   and the user needs to provide this manually (see above)
 
