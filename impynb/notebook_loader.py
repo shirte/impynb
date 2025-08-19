@@ -13,6 +13,9 @@ from IPython.core.interactiveshell import InteractiveShell
 from .util import is_runnable_cell
 
 
+# We use Loader over FileLoader, because FileLoader is supposed to be used for files
+# containing Python code only. The Loader class only requires the exec_module method
+# where we can execute the code in a notebook (given by its module name).
 class NotebookLoader(Loader):
     def __init__(
         self,
