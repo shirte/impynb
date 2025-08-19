@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v0.1.6 (2025-08-19)
+
+### Documentation
+
+* docs: Add section about package initializers ([`870eaf5`](https://github.com/shirte/impynb/commit/870eaf525a3bb49d0d1da40d689d8f2e930d34af))
+
+* docs: Mention Google Colab in Readme ([`1de7060`](https://github.com/shirte/impynb/commit/1de7060bfbe5c05d99114e5894dbd46e1ab94fd6))
+
+* docs: Add a module description ([`9ab4014`](https://github.com/shirte/impynb/commit/9ab401402a0d287ded8bf0532491cb25589a9fdb))
+
+### Fixes
+
+* fix: Update async execution check to include transformed cell code
+
+* avoid the warning "`should_run_async` will not call `transform_cell` automatically in the future." ([`a9c99cf`](https://github.com/shirte/impynb/commit/a9c99cf5351473ebfafe4345f4eff37e0f57fa88))
+
+* fix: Add Google Colab support ([`610c089`](https://github.com/shirte/impynb/commit/610c0890f38c8c87aa8dee799c8a32325a491e36))
+
+
 ## v0.1.5 (2025-08-19)
 
 ### Documentation
