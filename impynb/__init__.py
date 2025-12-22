@@ -4,10 +4,9 @@ import os
 import sys
 from typing import Optional
 
-from typing_extensions import Unpack
-
 from .import_context import NotebookFinderConfig, NotebookImportContext, configure
 from .notebook_finder import NotebookFinder
+from .polyfill import Unpack
 from .util import get_notebook_path, is_running_in_notebook
 
 __all__ = ["init", "configure", "NotebookImportContext"]
