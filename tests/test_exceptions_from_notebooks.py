@@ -5,7 +5,9 @@ import impynb  # noqa: F401
 
 def test_exceptions_from_notebooks() -> None:
     try:
-        from .test_package import raises_an_exception  # noqa: F401
+        from .test_package import (  # type: ignore[attr-defined]
+            raises_an_exception,  # noqa: F401
+        )
     except Exception as e:
         tb = e.__traceback__
         extracted = traceback.extract_tb(tb)

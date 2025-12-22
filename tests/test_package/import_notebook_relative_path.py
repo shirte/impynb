@@ -1,4 +1,4 @@
-from . import some_notebook_to_import
+from . import some_notebook_to_import  # type: ignore[attr-defined]
 
 assert some_notebook_to_import is not None
 

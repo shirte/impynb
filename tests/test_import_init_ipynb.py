@@ -2,7 +2,7 @@ import impynb  # noqa: F401
 
 
 def test_import_init_ipynb() -> None:
-    from .test_package.submodule_with_init_ipynb import (
+    from .test_package.submodule_with_init_ipynb import (  # type: ignore[attr-defined]
         NOTEBOOK_WAS_IMPORTED,
         VARIABLE_WAS_SET,
     )

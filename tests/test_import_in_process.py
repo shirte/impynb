@@ -19,7 +19,9 @@ def test_import_in_process() -> None:
 
             result_queue.put(found)
 
-            from .test_package import some_notebook_to_import
+            from .test_package import (  # type: ignore[attr-defined]
+                some_notebook_to_import,
+            )
 
             result_queue.put(some_notebook_to_import is not None)
             result_queue.put(some_notebook_to_import.NOTEBOOK_WAS_IMPORTED is not None)

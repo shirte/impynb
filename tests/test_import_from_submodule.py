@@ -2,7 +2,7 @@ import impynb  # noqa: F401
 
 
 def test_import_from_submodule() -> None:
-    from .test_package.submodule import is_in_a_submodule
+    from .test_package.submodule import is_in_a_submodule  # type: ignore[attr-defined]
 
     assert is_in_a_submodule is not None
     assert is_in_a_submodule.NOTEBOOK_WAS_IMPORTED is not None
@@ -10,7 +10,7 @@ def test_import_from_submodule() -> None:
 
 
 def test_relative_import_of_notebook_with_from() -> None:
-    from .test_package import import_some_local_module
+    from .test_package import import_some_local_module  # type: ignore[attr-defined]
 
     assert import_some_local_module is not None
     assert import_some_local_module.NOTEBOOK_WAS_IMPORTED_CORRECTLY is not None
