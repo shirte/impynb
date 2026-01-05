@@ -1,6 +1,35 @@
 # CHANGELOG
 
 
+## v0.1.7 (2026-01-05)
+
+### Chores
+
+* chore(deps): Allow ipykernel versions up to <8 ([`df0d42c`](https://github.com/shirte/impynb/commit/df0d42cb971cbe4a73ef31ee0ce7386147ac8c88))
+
+* chore: Add codespell to project ([`6b9578b`](https://github.com/shirte/impynb/commit/6b9578ba87979c26a8c5692990883c11dabab53c))
+
+* chore: Add codespell pre-commit hook ([`a63d2b6`](https://github.com/shirte/impynb/commit/a63d2b6b9f48c2b6aa5e4d87281ae619b8315d73))
+
+### Continuous Integration
+
+* ci: skip mypy checks ([`b6ccb46`](https://github.com/shirte/impynb/commit/b6ccb46e0b5b2a1daf0f1b3c798ed4a3c3741060))
+
+* ci: use default GITHUB_TOKEN for semantic-release ([`296bd7a`](https://github.com/shirte/impynb/commit/296bd7a95e4f8bebc31d5af50716bca470cc98d8))
+
+### Documentation
+
+* docs: Add section about init method ([`0db359f`](https://github.com/shirte/impynb/commit/0db359ffef8431e83877cc188a95b265aebb0a1d))
+
+### Fixes
+
+* fix: Enable configuration via init method ([`ee2c23c`](https://github.com/shirte/impynb/commit/ee2c23cea9d77ee15f561a6492da761c4cbc2ec6))
+
+### Testing
+
+* test: Check if impynb works in a new process ([`36fbd83`](https://github.com/shirte/impynb/commit/36fbd836e1e87911a80974e8ea67e13b5658b9da))
+
+
 ## v0.1.6 (2025-08-19)
 
 ### Documentation
