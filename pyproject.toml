@@ -1,6 +1,6 @@
 [project]
 name = "impynb"
-version = "0.1.7"
+version = "0.1.8"
 description = "Import Jupyter notebooks as Python modules"
 authors = [
     { name = "Steffen Hirte", email = "shirte@users.noreply.github.com" },

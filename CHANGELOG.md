@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v0.1.8 (2026-01-30)
+
+### Continuous Integration
+
+* ci: Add option to manually push to pypi ([`2f3b966`](https://github.com/shirte/impynb/commit/2f3b966faa14726c7ddec17a1b0674d1917d2238))
+
+### Fixes
+
+* fix: Conditionally import typing_extensions ([`66e84a5`](https://github.com/shirte/impynb/commit/66e84a50ffb3bbeae12e8551db69f8416a7e4aab))
+
+* fix: Put typing-extensions in main dependencies ([`58b3604`](https://github.com/shirte/impynb/commit/58b36042fd55d1f1b136190971ac6dc64aac2075))
+
+### Testing
+
+* test: make mypy happy in tests ([`18648f6`](https://github.com/shirte/impynb/commit/18648f6b30c7aec1add1b1c9a7dbfbc949397f8c))
+
+
 ## v0.1.7 (2026-01-05)
 
 ### Chores
